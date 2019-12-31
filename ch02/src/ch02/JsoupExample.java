@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class JsoupExample {
 
         String rawHtml = UrlUtils.request("https://www.kaggle.com/c/avito-duplicate-ads-detection/leaderboard");
         Document document = Jsoup.parse(rawHtml);
-        Elements tableRows = document.select("table.competition-leaderboard__table");
+        Elements tableRows = document.select("table.competition-leaderboard__table > tbody > tr");
         for (Element tr : tableRows) {
             Elements columns = tr.select("td");
             if (columns.isEmpty()) {
