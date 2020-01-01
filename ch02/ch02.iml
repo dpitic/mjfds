@@ -20,5 +20,9 @@
     <orderEntry type="library" name="Maven: net.minidev:json-smart:2.3" level="project" />
     <orderEntry type="library" name="Maven: net.minidev:accessors-smart:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: joinery:joinery-dataframe:1.9" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:4.1.0" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.supercsv:super-csv:2.4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.mapdb:mapdb:3.0.7" level="project" />
   </component>
 </module>
