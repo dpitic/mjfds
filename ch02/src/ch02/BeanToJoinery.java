@@ -53,8 +53,7 @@ public class BeanToJoinery {
             }
 
             List<Object> column = Lists.newArrayListWithCapacity(nrow);
-            for (E e :
-                    beans) {
+            for (E e : beans) {
                 Object value = getter.invoke(e);
                 column.add(value);
             }
