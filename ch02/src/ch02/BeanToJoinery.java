@@ -40,8 +40,7 @@ public class BeanToJoinery {
 
         Map<String, List<Object>> columns = Maps.newLinkedHashMap();
 
-        for (PropertyDescriptor pd :
-                properties) {
+        for (PropertyDescriptor pd : properties) {
             String name = pd.getName();
             if ("class".equals(name)) {
                 continue;
