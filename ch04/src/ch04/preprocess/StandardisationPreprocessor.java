@@ -8,6 +8,9 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import java.util.Arrays;
 
+/**
+ * Standard normalisation data preprocessor.
+ */
 public class StandardisationPreprocessor {
 
     private final DescriptiveStatistics[] stats;
@@ -16,6 +19,12 @@ public class StandardisationPreprocessor {
         this.stats = stats;
     }
 
+    /**
+     * Factory method to return a new standard normalisation data preprocessor.
+     *
+     * @param dataset to calculate normalisation parameters.
+     * @return new standard normalisation data preprocessor object.
+     */
     public static StandardisationPreprocessor train(Dataset dataset) {
         RealMatrix matrix = new Array2DRowRealMatrix(dataset.getX());
 
@@ -29,6 +38,12 @@ public class StandardisationPreprocessor {
         return new StandardisationPreprocessor(stats);
     }
 
+    /**
+     * Return a standard normalised data set.
+     *
+     * @param dataset to normalise.
+     * @return standard normalised data set.
+     */
     public Dataset transform(Dataset dataset) {
         RealMatrix matrix = new Array2DRowRealMatrix(dataset.getX(), true);
         int ncol = matrix.getColumnDimension();
