@@ -29,14 +29,39 @@ public class PagePredictionSmile {
 
         List<Split> folds = train.kFold(3);
 
-        double[] lambdas = { 0, 0.5, 1.0, 5.0, 10.0, 100.0, 1000.0 };
-        for (double lambda :
-                lambdas) {
+        double[] lambdas = {0, 0.5, 1.0, 5.0, 10.0, 100.0, 1000.0};
+        for (double lambda : lambdas) {
             DescriptiveStatistics summary = Smile.crossValidation(folds,
                     fold -> {
-                return new LogisticRegression(fold.getX(), fold.getY(), lambda);
-                // TODO: fix this error
-            });
+                        return LogisticRegression
+                                .fit(fold.getX(), fold.getYAsInt(), lambda,
+                                        0.001, 100);
+                    });
+
+            double mean = summary.getMean();
+            double std = summary.getStandardDeviation();
+            System.out.printf("logreg, λ=%8.3f, auc=%.4f ± %.4f%n",
+                    lambda, mean, std);
         }
+
+//        MercerKernel<double[]> kernel = new PolynomialKernel(2);
+//
+//        double[] Cs = {0.001, 0.01, 0.1};
+//        for (double C : Cs) {
+//            DescriptiveStatistics summary = Smile.crossValidation(folds,
+//                    fold -> {
+//                        double[][] X = fold.getX();
+//                        int[] y = fold.getYAsInt();
+//                        SVM<double[]> svm = SVM.fit(X, y, kernel, C, 0.001);
+//                        return svm;
+//                    });
+//
+//            double mean = summary.getMean();
+//            double std = summary.getStandardDeviation();
+//            System.out.printf("svm     C=%8.3f, auc=%.4f ± %.4f%n",
+//                    C, mean, std);
+//        }
+
+        // RandomForest API has changed
     }
 }
