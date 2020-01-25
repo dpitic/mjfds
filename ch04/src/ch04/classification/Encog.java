@@ -96,6 +96,4 @@ public class Encog {
     public static void shutdown() {
         org.encog.Encog.getInstance().shutdown();
     }
-
-
 }

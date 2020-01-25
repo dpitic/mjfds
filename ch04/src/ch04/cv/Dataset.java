@@ -88,9 +88,12 @@ public class Dataset implements Serializable {
     }
 
     /**
-     * Return a JSAT ch04.classification data set for binary ch04.classification.
+     * Return a JSAT classification data set for binary classification.
+     * <p>
+     * This helper method wraps the feature dataset in the JSAT
+     * ClassificationDataSet wrapper class.
      *
-     * @return ClassificationDataSet object suitable for binary ch04.classification.
+     * @return ClassificationDataSet object suitable for binary classification.
      */
     public ClassificationDataSet toJsatClassificationDataset() {
         CategoricalData binary = new CategoricalData(2);
@@ -99,13 +102,16 @@ public class Dataset implements Serializable {
         for (int i = 0; i < X.length; i++) {
             int target = (int) y[i];
             DataPoint row = new DataPoint(new DenseVector(X[i]));
-            data.add(new DataPointPair<Integer>(row, target));
+            data.add(new DataPointPair<>(row, target));
         }
         return new ClassificationDataSet(data, binary);
     }
 
     /**
      * Return a JSAT regression data set.
+     * <p>
+     * This helper method wraps the labels dataset in the JSAT
+     * RegressionDataSet wrapper class.
      *
      * @return RegressionDataset object.
      */
@@ -114,7 +120,7 @@ public class Dataset implements Serializable {
 
         for (int i = 0; i < X.length; i++) {
             DataPoint row = new DataPoint(new DenseVector(X[i]));
-            data.add(new DataPointPair<Double>(row, y[i]));
+            data.add(new DataPointPair<>(row, y[i]));
         }
         return new RegressionDataSet(data);
     }

@@ -1,0 +1,75 @@
+package ch04.classification;
+
+import ch04.cv.Dataset;
+import ch04.cv.Split;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.encog.mathutil.libsvm.*;
+
+import java.util.List;
+import java.util.function.Function;
+
+/**
+ * Binary classification using LIBSVM library.
+ */
+public class libSVM {
+
+    public static void mute() {
+        svm.svm_set_print_string_function(s -> {
+        });
+    }
+
+    public static svm_model train(Dataset dataset, svm_parameter param) {
+        svm_problem prob = wrapDataset(dataset);
+        return svm.svm_train(prob, param);
+    }
+
+    public static DescriptiveStatistics crossValidate(
+            List<Split> folds, Function<Dataset, svm_model> trainer) {
+        double[] aucs = folds.parallelStream().mapToDouble(fold -> {
+            Dataset foldTrain = fold.getTrain();
+            Dataset foldValidation = fold.getTest();
+            svm_model model = trainer.apply(foldTrain);
+            return auc(model, foldValidation);
+        }).toArray();
+        return new DescriptiveStatistics(aucs);
+    }
+
+    public static double auc(svm_model model, Dataset dataset) {
+        double[] probs = predictProba(model, dataset);
+        return Metrics.auc(dataset.getY(), probs);
+    }
+
+    public static double[] predictProba(svm_model model, Dataset dataset) {
+
+    }
+
+    public static svm_problem wrapDataset(Dataset dataset) {
+        svm_problem prob = new svm_problem();
+        prob.l = dataset.length();
+        prob.x = wrapAsSvmNodes(dataset.getX());
+        prob.y = dataset.getY();
+        return prob;
+    }
+
+    private static svm_node[][] wrapAsSvmNodes(double[][] X) {
+        int n = X.length;
+        svm_node[][] nodes = new svm_node[n][];
+
+        for (int i = 0; i < n; i++) {
+            nodes[i] = wrapAsSvmNode(X[i]);
+        }
+        return nodes;
+    }
+
+    private static svm_node[] wrapAsSvmNode(double[] dataRow) {
+        svm_node[] svmRow = new svm_node[dataRow.length];
+
+        for (int j = 0; j < dataRow.length; j++) {
+            svm_node node = new svm_node();
+            node.index = j;
+            node.value = dataRow[j];
+            svmRow[j] = node;
+        }
+        return svmRow;
+    }
+}

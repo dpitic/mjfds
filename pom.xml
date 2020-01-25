@@ -14,6 +14,11 @@
             <version>28.1-jre</version>
         </dependency>
         <dependency>
+            <groupId>tw.edu.ntu.csie</groupId>
+            <artifactId>libsvm</artifactId>
+            <version>3.24</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.haifengl</groupId>
             <artifactId>smile-netlib</artifactId>
             <version>2.0.0</version>
