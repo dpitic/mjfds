@@ -86,7 +86,10 @@ public class Metrics {
     }
 
     /**
-     * Calculate the confusion matrix precision.
+     * Calculate the model prediction precision.
+     * <p>
+     * Precision is the fraction of correctly predicted positive items among all
+     * items in the model predicted as positive.
      *
      * @param actual    data array.
      * @param proba     predicted data array.
@@ -100,7 +103,10 @@ public class Metrics {
     }
 
     /**
-     * Calculate the confusion matrix recall.
+     * Calculate the model prediction recall.
+     * <p>
+     * Recall is the fraction of correctly predicted positive items among items
+     * that are actually positive.
      *
      * @param actual    data array.
      * @param proba     predicted data array.
@@ -114,7 +120,9 @@ public class Metrics {
     }
 
     /**
-     * Calculate the F1 score for the confusion matrix.
+     * Calculate the F1 score for the prediction model.
+     * <p>
+     * The F1 score combines both precision and recall into one number.
      *
      * @param actual    data array.
      * @param proba     predicted data array.
@@ -129,6 +137,8 @@ public class Metrics {
 
     /**
      * Factory method used to return a new ConfusionMatrix object.
+     * <p>
+     * The confusion matrix summarises the performance of a binary classifier.
      *
      * @param actual    data.
      * @param proba     predicted results.

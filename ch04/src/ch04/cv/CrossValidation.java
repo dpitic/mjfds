@@ -55,8 +55,9 @@ public class CrossValidation {
     public static Split trainTestSplit(Dataset dataset, double testRatio,
                                        boolean shuffle, long seed) {
         Validate.isTrue(testRatio > 0.0 && testRatio < 1.0,
-                "test ratio nust be in (0, 1) interval.");
+                "test ratio must be in (0, 1) interval.");
 
+        // Create array of dataset indices and shuffle rows if required
         int[] indexes = IntStream.range(0, dataset.length()).toArray();
         if (shuffle) {
             shuffle(indexes, seed);
@@ -64,6 +65,7 @@ public class CrossValidation {
 
         int trainSize = (int) (indexes.length * (1 - testRatio));
 
+        // Split dataset indices into train and test indices
         int[] trainIndex = Arrays.copyOfRange(indexes, 0, trainSize);
         int[] testIndex = Arrays.copyOfRange(indexes, trainSize,
                 indexes.length);

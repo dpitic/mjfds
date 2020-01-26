@@ -7,18 +7,28 @@ import java.util.Objects;
  */
 public class Split {
 
-    private final Dataset train;
-    private final Dataset test;
+    private final Dataset train; // training data set
+    private final Dataset test; // test (validation) data set
 
     public Split(Dataset train, Dataset test) {
         this.train = train;
         this.test = test;
     }
 
+    /**
+     * Return the training data set.
+     *
+     * @return training data set.
+     */
     public Dataset getTrain() {
         return train;
     }
 
+    /**
+     * Return the test (validation) data set.
+     *
+     * @return test data set.
+     */
     public Dataset getTest() {
         return test;
     }
@@ -39,7 +49,7 @@ public class Split {
     }
 
     /**
-     * Split dataset int train and test data sets based on train and test
+     * Split dataset into train and test data sets based on train and test
      * indices.
      *
      * @param dataset    to split.
@@ -52,7 +62,7 @@ public class Split {
         double[][] X = dataset.getX();
         double[] y = dataset.getY();
 
-        // Create training data set
+        // Create training data set from train indices
         int trainSize = trainIndex.length;
 
         double[][] trainXres = new double[trainSize][];
@@ -63,7 +73,7 @@ public class Split {
             trainYres[i] = y[idx];
         }
 
-        // Create test data set
+        // Create test data set from test indices
         int testSize = testIndex.length;
 
         double[][] testXres = new double[testSize][];

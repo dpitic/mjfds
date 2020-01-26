@@ -15,32 +15,53 @@ import java.util.List;
 /**
  * This class represents a supervised learning data set consisting of features
  * and labels.  The public interface provides methods to split the dataset into
- * training and test data sets and k-fold splits.
+ * training and test data sets and k-fold splits.  This is a helper class for
+ * holding the data.
  */
 public class Dataset implements Serializable {
 
     private static long SEED = 1;
 
-    private final double[][] X;
-    private final double[] y;
+    private final double[][] X; // features matrix
+    private final double[] y; // labels array
 
     public Dataset(double[][] X, double[] y) {
         this.X = X;
         this.y = y;
     }
 
+    /**
+     * Return the features matrix.
+     *
+     * @return features matrix.
+     */
     public double[][] getX() {
         return X;
     }
 
+    /**
+     * Return the labels array.
+     *
+     * @return labels array.
+     */
     public double[] getY() {
         return y;
     }
 
+    /**
+     * Return the labels array as an array of integers.
+     *
+     * @return labels array with integer elements.
+     */
     public int[] getYAsInt() {
         return Arrays.stream(y).mapToInt(d -> (int) d).toArray();
     }
 
+    /**
+     * Return the number of rows in the features matrix.
+     *
+     * @return number of rows in the features matrix.
+     */
     public int length() {
         return getX().length;
     }
