@@ -6,12 +6,17 @@ import ch04.cv.Split;
 import ch04.preprocess.StandardisationPreprocessor;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import smile.classification.LogisticRegression;
+import smile.classification.SVM;
+import smile.math.kernel.MercerKernel;
+import smile.math.kernel.PolynomialKernel;
 
 import java.io.IOException;
 import java.util.List;
 
 /**
- * Page prediction using Smile machine learning library.
+ * Page prediction using Smile machine learning library.  The model tries to
+ * predict whether a URL comes from the first page of the search engine results
+ * or not.
  */
 public class PagePredictionSmile {
 
@@ -53,6 +58,8 @@ public class PagePredictionSmile {
 //                        double[][] X = fold.getX();
 //                        int[] y = fold.getYAsInt();
 //                        SVM<double[]> svm = SVM.fit(X, y, kernel, C, 0.001);
+//                        // API is different; code broken here
+//                        svm.trainPlattScaling(X, y);
 //                        return svm;
 //                    });
 //

@@ -18,11 +18,26 @@ public class LibSVM {
         });
     }
 
+    /**
+     * Return a trained LIBSVM model.
+     *
+     * @param dataset on which to train the model.
+     * @param param   LIBSVM model training parameters.
+     * @return Trained model.
+     */
     public static svm_model train(Dataset dataset, svm_parameter param) {
         svm_problem prob = wrapDataset(dataset);
         return svm.svm_train(prob, param);
     }
 
+    /**
+     * Return descriptive statistics for the area under curve calculated for
+     * each fold.
+     *
+     * @param folds   Number of K-folds for cross validation.
+     * @param trainer Callback function that creates a model.
+     * @return Descriptive statistics for AUCs of each fold.
+     */
     public static DescriptiveStatistics crossValidate(
             List<Split> folds, Function<Dataset, svm_model> trainer) {
         double[] aucs = folds.parallelStream().mapToDouble(fold -> {

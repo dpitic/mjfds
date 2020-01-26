@@ -17,7 +17,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Page prediction using JSAT library.
+ * Page prediction using JSAT library.  The model tries to predict whether a
+ * URL comes from the first page of the search engine results or not.
  */
 public class PagePredictionJSAT {
 

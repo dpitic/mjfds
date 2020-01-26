@@ -21,6 +21,14 @@ import java.util.stream.IntStream;
  */
 public class BeanToJoinery {
 
+    /**
+     * Return new Joinery DataFrame of the provided list.
+     *
+     * @param beans List to convert to a DataFrame.
+     * @param beanClass Class that maps to the rows in the list.
+     * @param <E>
+     * @return DataFrame
+     */
     public static <E> DataFrame<Object> convert(List<E> beans,
                                                 Class<E> beanClass) {
         try {

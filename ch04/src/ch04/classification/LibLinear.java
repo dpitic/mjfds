@@ -20,6 +20,14 @@ public class LibLinear {
         de.bwaldvogel.liblinear.Linear.setDebugOutput(devNull);
     }
 
+    /**
+     * Return descriptive statistics for the area under curve calculated for
+     * each fold
+     *
+     * @param folds   Number of K-folds for cross validation.
+     * @param trainer Callback function that creates a model.
+     * @return Descriptive statistics for AUCs of each fold.
+     */
     public static DescriptiveStatistics crossValidate(
             List<Split> folds, Function<Dataset, Model> trainer) {
         double[] aucs = folds.parallelStream().mapToDouble(fold -> {
@@ -31,6 +39,13 @@ public class LibLinear {
         return new DescriptiveStatistics(aucs);
     }
 
+    /**
+     * Return a trained LIBLINEAR model.
+     *
+     * @param dataset on which to train the model.
+     * @param param   LIBLINEAR model training parameters.
+     * @return Trained model.
+     */
     public static Model train(Dataset dataset, Parameter param) {
         Problem problem = wrapDataset(dataset);
         return Linear.train(problem, param);

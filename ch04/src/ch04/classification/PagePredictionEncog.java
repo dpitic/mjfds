@@ -15,7 +15,9 @@ import org.encog.neural.networks.training.strategy.RegularizationStrategy;
 import java.io.IOException;
 
 /**
- * Page prediction using Encog neural network library.
+ * Page prediction using Encog neural network library.  The model tries to
+ * predict whether a URL comes from the first page of the search engine results
+ * or not.
  */
 public class PagePredictionEncog {
 

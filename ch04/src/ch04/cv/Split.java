@@ -57,7 +57,8 @@ public class Split {
      * @param testIndex  test data set index integer array.
      * @return a Split object containing the train and test data sets.
      */
-    public static Split fromIndexes(Dataset dataset, int[] trainIndex,
+    public static Split fromIndexes(Dataset dataset,
+                                    int[] trainIndex,
                                     int[] testIndex) {
         double[][] X = dataset.getX();
         double[] y = dataset.getY();
